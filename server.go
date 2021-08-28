@@ -37,7 +37,7 @@ func (d *dnsServer) Query(ctx context.Context, in *pb.DnsPacket) (*pb.DnsPacket,
 	r.SetReply(m)
 	r.Authoritative = true
 
-	// TODO: query a database and provide real answers here!
+	// TODO: query a database / cache / any backend and provide real answers here!
 	for _, q := range r.Question {
 		fmt.Println(q.Name, q.Qtype, q.Qclass)
 		hdr := dns.RR_Header{Name: q.Name, Rrtype: q.Qtype, Class: q.Qclass}
