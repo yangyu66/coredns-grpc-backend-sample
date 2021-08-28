@@ -29,6 +29,7 @@ type dnsServer struct{}
 
 func (d *dnsServer) Query(ctx context.Context, in *pb.DnsPacket) (*pb.DnsPacket, error) {
 	m := new(dns.Msg)
+
 	if err := m.Unpack(in.Msg); err != nil {
 		return nil, fmt.Errorf("failed to unpack msg: %v", err)
 	}
@@ -38,6 +39,7 @@ func (d *dnsServer) Query(ctx context.Context, in *pb.DnsPacket) (*pb.DnsPacket,
 
 	// TODO: query a database and provide real answers here!
 	for _, q := range r.Question {
+		fmt.Println(q.Name, q.Qtype, q.Qclass)
 		hdr := dns.RR_Header{Name: q.Name, Rrtype: q.Qtype, Class: q.Qclass}
 		switch q.Qtype {
 		case dns.TypeA:

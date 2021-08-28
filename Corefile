@@ -1,6 +1,7 @@
-example.com.:1053 {
-    proxy . 127.0.0.1:8053 {
-        protocol grpc insecure
+.:1053 {
+    grpc . 127.0.0.1:8053 {
+        policy random
     }
     log
+    cache
 }
